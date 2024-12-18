@@ -1,5 +1,20 @@
 import { useState } from 'react'
 
+const Statistics = (props) => {
+  return (
+    <div>
+      <h2>statistics</h2>
+      <Display label="good" counter={props.good} />
+      <Display label="neutral" counter={props.neutral} />
+      <Display label="bad" counter={props.bad} />
+      <Display label="all" counter={props.good + props.neutral + props.bad} />
+      <Display label="average" counter={(props.good - props.bad) / (props.good + props.neutral + props.bad)} />
+      <Display label="positive" counter={(props.good / (props.good + props.neutral + props.bad)) * 100 + '%'} />
+    </div>
+  )
+}
+
+
 const Display = ({label, counter}) => {
   return (
     <div>{label} {counter}</div>
@@ -46,13 +61,7 @@ const App = () => {
       <Button onClick={increaseGood} text="good" />
       <Button onClick={increaseNeutral} text="neutral" />
       <Button onClick={increaseBad} text="bad" />
-      <h2>statistics</h2>
-      <Display label="good" counter={good} />
-      <Display label="neutral" counter={neutral} />
-      <Display label="bad" counter={bad} />
-      <Display label="all" counter={good + neutral + bad} />
-      <Display label="average" counter={(good - bad) / (good + neutral + bad)} />
-      <Display label="positive" counter={(good / (good + neutral + bad)) * 100 + '%'} />
+      <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
   )
 }
