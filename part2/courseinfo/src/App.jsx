@@ -22,7 +22,7 @@ const App = () => {
       },
       {
         name: 'State ofasdfasdkfh  a component',
-        exercises: 1000,
+        exercises: 10,
         id: 345
       }
     ]
