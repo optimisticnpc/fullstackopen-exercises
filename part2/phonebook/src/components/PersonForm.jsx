@@ -5,7 +5,19 @@ const PersonForm = ({ persons, setPersons, newName, setNewName, newNumber, setNe
   const addPerson = (event) => {
     event.preventDefault();
     if (persons.some(person => person.name === newName)) {
-      alert(`${newName} is already in the phonebook`);
+      if (window.confirm(`${newName} is already in the phonebook, replace the old number with a new one?`)) {
+        const person = persons.find(person => person.name === newName)
+        const personObject = {
+          ...person,
+          number: newNumber,
+        }
+        personsService.update(person.id, personObject)
+        .then(returnedPerson => {
+          setPersons(persons.map(person => person.id === returnedPerson.id ? returnedPerson : person))
+          setNewName('')
+          setNewNumber('')
+        })
+      }
       return;
     }
     const personObject = {
