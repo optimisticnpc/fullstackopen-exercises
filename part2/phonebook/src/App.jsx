@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import Filter from './Filter'
-import PersonForm from './PersonForm'
-import Persons from './Persons'
-
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
+import Persons from './components/Persons'
+import personsService from './services/persons'
 const App = () => {
 
   const [filter, setFilter] = useState('')
@@ -17,16 +17,13 @@ const App = () => {
     setFilter(event.target.value)
   }
 
-  const hook = () => {
-    axios.get('http://localhost:3001/persons')
-      .then(response => {
-        console.log('response:', response)
-        console.log('response.data:', response.data)
-        setPersons(response.data)
-      })
-  }
-
-  useEffect(hook, [])
+  useEffect(() => {
+    personsService
+    .getAll()
+    .then(initialPersons => {
+      setPersons(initialPersons)
+    })
+  }, [])
 
   return (
     <div>
