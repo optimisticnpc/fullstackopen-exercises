@@ -1,6 +1,6 @@
 import personsService from '../services/persons'
 
-const Persons = ({ persons, filter, setPersons }) => {
+const Persons = ({ persons, filter, setPersons}) => {
     const isPersonMatchFilter = (person) => {
         // console.log('matching filter:', filter)
         return person.name.toLowerCase().includes(filter.toLowerCase())

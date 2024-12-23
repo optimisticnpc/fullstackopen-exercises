@@ -1,7 +1,7 @@
 import personsService from '../services/persons'
 
 
-const PersonForm = ({ persons, setPersons, newName, setNewName, newNumber, setNewNumber }) => {
+const PersonForm = ({ persons, setPersons, newName, setNewName, newNumber, setNewNumber, setNotificationMessage }) => {
   const addPerson = (event) => {
     event.preventDefault();
     if (persons.some(person => person.name === newName)) {
@@ -31,6 +31,10 @@ const PersonForm = ({ persons, setPersons, newName, setNewName, newNumber, setNe
       setNewName('')
       setNewNumber('')
     })
+    setNotificationMessage(`Added ${newName}`) 
+    setTimeout(() => {
+      setNotificationMessage(null)
+    }, 5000)
   };
 
   const handleNameChange = (event) => {
