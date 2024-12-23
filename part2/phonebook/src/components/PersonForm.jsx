@@ -17,6 +17,17 @@ const PersonForm = ({ persons, setPersons, newName, setNewName, newNumber, setNe
           setNewName('')
           setNewNumber('')
         })
+        .catch(error => {
+          setNotificationMessage({ message: `Information of ${newName} has already been removed from server`, type: 'error' })
+          // Reload the list of persons
+          personsService.getAll()
+          .then(returnedPersons => {
+            setPersons(returnedPersons)
+          })
+          setTimeout(() => {
+            setNotificationMessage(null)
+          }, 5000)
+        })
       }
       return;
     }
@@ -31,7 +42,7 @@ const PersonForm = ({ persons, setPersons, newName, setNewName, newNumber, setNe
       setNewName('')
       setNewNumber('')
     })
-    setNotificationMessage(`Added ${newName}`) 
+    setNotificationMessage({ message: `Added ${newName}`, type: 'success' }) 
     setTimeout(() => {
       setNotificationMessage(null)
     }, 5000)

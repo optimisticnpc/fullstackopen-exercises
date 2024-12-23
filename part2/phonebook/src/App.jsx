@@ -6,7 +6,7 @@ import Persons from './components/Persons'
 import personsService from './services/persons'
 const App = () => {
 
-  const [errorMessage, setNotificationMessage] = useState(null)
+  const [notificationMessage, setNotificationMessage] = useState(null)
   const [filter, setFilter] = useState('')
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
@@ -18,9 +18,10 @@ const App = () => {
       return null
     }
   
+    // If the message is an error, add the error class. If it is a success, add the success class
     return (
-      <div className='error'>
-        {message}
+      <div className={message.type}>
+        {message.message}
       </div>
     )
   }
@@ -41,7 +42,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={errorMessage} />
+      <Notification message={notificationMessage} />
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
       <h2>Add a new</h2>
       <PersonForm persons={persons} setPersons={setPersons} newName={newName} 
