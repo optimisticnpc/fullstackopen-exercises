@@ -10,7 +10,6 @@ const App = () => {
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value)
-    console.log(filter)
   }
 
   useEffect(() => {
