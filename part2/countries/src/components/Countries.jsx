@@ -68,6 +68,12 @@ const Countries = ({ filter, countries }) => {
                 <CountryView country={countriesInFilter[0]} weather={weather} />
             </div>
         )
+    } else if (countriesInFilter.length === 1 && !weather) {
+        return (
+            <div>
+                Loading weather data...
+            </div>
+        )
     } else {
         return (
             <div>
