@@ -1,4 +1,9 @@
+import { useState } from 'react'
+import CountryView from './CountryView'
+
 const Countries = ({ filter, countries }) => {
+
+    const [selectedCountry, setSelectedCountry] = useState(null)
 
     // console.log('countries:', countries)
     
@@ -24,23 +29,16 @@ const Countries = ({ filter, countries }) => {
             {countriesInFilter.map(country => (
                 <div key={country.name.common}>
                     {country.name.common}
+                    <button onClick={() => setSelectedCountry(country)}>Show</button>
                 </div>
             ))}
+            {selectedCountry && <CountryView country={selectedCountry} />}
         </div>
     )
     } else if (countriesInFilter.length === 1) {
         return (
             <div>
-                <h1>{countriesInFilter[0].name.common}</h1> 
-                <img src={countriesInFilter[0].flags.png} alt={countriesInFilter[0].name.common} />
-                <p>Capital: {countriesInFilter[0].capital}</p>
-                <p>Area: {countriesInFilter[0].area}</p>
-                <p>Languages:</p>
-                <ul>
-                    {Object.values(countriesInFilter[0].languages).map(language => (
-                        <li key={language}>{language}</li>
-                    ))}
-                </ul>
+                <CountryView country={countriesInFilter[0]} />
             </div>
         )
     } else {
